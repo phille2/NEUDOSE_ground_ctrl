@@ -36,7 +36,7 @@ class Tracker(object):
         return (self.our_cubesat.alt, self.our_cubesat.az)
 
     def calculate_next_position(self):
-        self.our_position.date = '2015/3/13'
+        self.our_position.date = ephem.now()
         return self.our_position.next_pass(self.our_cubesat)
 
     def __init__(self, textfile = "stations.txt", name = "ISS (ZARYA)",
