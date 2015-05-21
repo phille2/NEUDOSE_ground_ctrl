@@ -1,0 +1,39 @@
+\documentclass{article}
+\pagestyle{empty}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,shapes.geometric,arrows}
+\begin{document}
+
+\input{tikz_styles.tex}
+
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+
+\begin{tikzpicture}[auto, thick, node distance=1.5cm, >=stealth']
+
+  \node [input, name=input] {};
+  \node [sum, right of=input] (sum) {};
+  \node [block, right of=sum] (F) {$F(s)$};
+  \node [block, right of=F] (N) {$N(s)$};
+  \node [coordinate, right of=N, node distance=1cm] (branch) {};
+  \node [output, name=output, right of=branch] {};
+  \node [coordinate, below of=branch, node distance=1cm] (foo) {};
+
+  \draw [->] (input) edge node {$\theta_{\rm in}$} (sum);
+  \draw [->] (sum) -- (F);
+  \draw [->] (F) -- (N);
+  \draw [->] (N) edge node {$\theta_{\rm out}$} (output);
+  \draw [-] (branch) -- (foo);
+  \draw [->] (foo) -| (sum);
+
+  %\node [above of=input, node distance=0.3cm] {$\theta_{\rm in}$};
+  %\node [above of=output, node distance=0.3cm] {$\theta_{\rm out}$};
+
+  \draw [-,thin] (sum.north west) -- (sum.south east);
+  \draw [-,thin] (sum.north east) -- (sum.south west);
+
+\end{tikzpicture}
+
+\end{document}
+
